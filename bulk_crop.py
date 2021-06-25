@@ -3,10 +3,11 @@ import json
 import os
 import shutil
 
+
 def bulk_crop():
-    # Open json results file and convert to string, escape back slashes to prevent error, then load back as json
+    # Open results and convert to string, escape back slashes in results to prevent jsondecode error, then load back as json
     # res = "result.json"
-    res = "C:\\uni_project\\final-year-project-vmmr-cmd\\yolo_gpu_large\\combining\\result.json"
+    res = r"C:\uni_project\final-year-project-vmmr-cmd\yolo_gpu_large\combining\result.json"
     try:
         with open(res) as f:
             strRes = f.read()
@@ -17,7 +18,7 @@ def bulk_crop():
     # For entire results, check if 'objects' is not empty and if class name == 'Registration',then get bounding box coordinates
     else:
         # Clear crops directory if exists, else create new
-        dir = 'C:\\uni_project\\final-year-project-vmmr-cmd\\yolo_gpu_large\\combining\\crops'
+        dir = r'C:\uni_project\final-year-project-vmmr-cmd\yolo_gpu_large\combining\crops'
         if os.path.isdir(dir):
             shutil.rmtree(dir)
             os.mkdir(dir)
@@ -38,7 +39,7 @@ def bulk_crop():
                         box_height = coords['height']
                         # Open image
                         im = Image.open(str(d[i]['filename']))
-                        # Size of the image in pixels (size of orginal image)
+                        # Size of the image in pixels (size of original image)
                         width, height = im.size
                         # Setting the points for cropped image
                         left_x = (center_x * width) - box_width*width/2

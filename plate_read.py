@@ -3,7 +3,8 @@ import glob
 from time import sleep
 import json
 
-#Define class for plate and all its accompanying details
+
+#Define class for reg plate and all its accompanying details
 class plate:
     def __init__(self, reg, accuracy, frame, crop, coords, model, color):
         self.reg = reg
@@ -14,8 +15,9 @@ class plate:
         self.model = model
         self.color = color
 
+
 def plate_read():
-    # Open YOLO detection results file and convert to string, change \ to \\ to prevent error, then load back as json
+    # Open YOLO detection results file and convert to string, escape \ to prevent JSON decode error, then load back as json
     res = r"C:\uni_project\final-year-project-vmmr-cmd\yolo_gpu_large\combining\result.json"
     with open(res) as f:
         strRes = f.read()
@@ -23,15 +25,14 @@ def plate_read():
     d = json.loads(newRes)
     #Create list to store found plate details
     found_plates = []
-
     #Characters before and after frame and crop indices used to find the indices and remove leading zeroes
     frame_start = 's\\'
     frame_end = '_crop'
     crop_start = '_crop'
     crop_end = '.'
-
     #Set plate region
     regions = ['gb']
+
 
     #For each crop that contains a detected plate, send it to the plate reader and get back the registraion guess
     #and accuracy score, then find the frame and crop index from the crop file name and store these in the found_plates
@@ -71,6 +72,7 @@ def plate_read():
             #Store all plate specific details in found_plates list
             found_plates.append(plate(f_reg,f_score,frame_index,crop_index,None,'Unknown','Unknown'))
 
+
     #Cross compare found plate results with detected plate results in order to get bounding box coordinates for labelling purposes
     #For all read plates
     for x in range(0,len(found_plates)):
@@ -82,7 +84,6 @@ def plate_read():
                 for m in range(0,len(d[i]['objects'])):
                     #If crop indices match
                     if(str(m) == found_plates[x].crop):
-    #                     print('frame',str(d[i]['frame_id']),found_plates[x].frame,'crop',str(m),found_plates[x].crop)
                         #Get coordinates
                         found_plates[x].coords = d[i]['objects'][m]['relative_coordinates']
     for m in range(0,len(found_plates)):

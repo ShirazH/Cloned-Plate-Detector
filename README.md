@@ -18,3 +18,6 @@ plate is within the bounding box of a car, it is predicted to belong to that car
 prediction. The comparisons are printed in the console, finally the vehicle data and plate crops are 
 labelled at the top of the video in each frame. An edited video that contains all of these drawn labels is 
 returned as the final output.
+
+## Example Output:
+![002](https://user-images.githubusercontent.com/36639745/123460988-5e838400-d5e0-11eb-8a59-4af1df418ab8.jpeg)

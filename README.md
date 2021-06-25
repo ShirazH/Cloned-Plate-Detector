@@ -21,3 +21,5 @@ returned as the final output.
 
 ## Example Output:
 ![002](https://user-images.githubusercontent.com/36639745/123460988-5e838400-d5e0-11eb-8a59-4af1df418ab8.jpeg)
+
+## [Link for project blog](https://www.doc.gold.ac.uk/~shuss020/my-wordpress/)
